@@ -1,0 +1,172 @@
+
+{% extends "base.html" %}
+
+{% block title %}Home | ML Portfolio{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-content">
+        <div class="hero-label">
+            <span class="status-dot"></span>
+            MACHINE LEARNING PORTFOLIO
+        </div>
+
+        <h1>
+            Exploring Data.<br>
+            <span>Building Intelligence.</span>
+        </h1>
+
+        <p>
+            Selamat datang di Digital Machine Learning Portfolio.
+            Sebuah ruang dokumentasi dan eksplorasi penerapan
+            Machine Learning melalui berbagai studi kasus,
+            analisis data, dan simulasi prediksi.
+        </p>
+
+        <div class="hero-actions">
+            <a href="#practicum" class="btn-primary">
+                Jelajahi Praktikum <span>→</span>
+            </a>
+            <a href="#about" class="btn-outline">
+                Tentang Portofolio
+            </a>
+        </div>
+
+        <div class="hero-stats">
+            <div>
+                <h3>02</h3>
+                <span>Praktikum</span>
+            </div>
+            <div>
+                <h3>02</h3>
+                <span>Algoritma</span>
+            </div>
+            <div>
+                <h3>100%</h3>
+                <span>Simulasi Pembelajaran</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="hero-visual">
+        <div class="visual-card">
+            <div class="visual-header">
+                <span>DATA ANALYTICS</span>
+                <span class="live-indicator">● ACTIVE</span>
+            </div>
+
+            <div class="chart-icon">
+                <div class="chart-grid">
+                    <div class="chart-bar bar-one"></div>
+                    <div class="chart-bar bar-two"></div>
+                    <div class="chart-bar bar-three"></div>
+                    <div class="chart-bar bar-four"></div>
+                    <div class="chart-bar bar-five"></div>
+                </div>
+            </div>
+
+            <div class="visual-footer">
+                <div>
+                    <small>MODEL STATUS</small>
+                    <strong>Ready to Predict</strong>
+                </div>
+                <div class="brain-icon">ML</div>
+            </div>
+        </div>
+
+        <div class="floating-tag tag-top">Python</div>
+        <div class="floating-tag tag-bottom">Scikit-learn</div>
+    </div>
+</section>
+
+<section class="technology">
+    <span>TOOLS & TECHNOLOGIES</span>
+    <div class="tech-list">
+        <span>PYTHON</span>
+        <span>SCIKIT-LEARN</span>
+        <span>PANDAS</span>
+        <span>NUMPY</span>
+        <span>FLASK</span>
+    </div>
+</section>
+
+<section class="practicum-section" id="practicum">
+    <div class="section-heading">
+        <div>
+            <span class="section-label">MY LEARNING JOURNEY</span>
+            <h2>Featured Practicum</h2>
+            <p>Eksplorasi penerapan algoritma Machine Learning melalui studi kasus simulasi.</p>
+        </div>
+        <span class="project-count">02 PROJECTS</span>
+    </div>
+
+    <div class="project-grid">
+
+        <article class="project-card">
+            <div class="project-top">
+                <span class="project-number">01</span>
+                <span class="project-type">REGRESSION</span>
+            </div>
+
+            <div class="project-symbol">↗</div>
+
+            <h3>Simple Linear Regression</h3>
+
+            <p>
+                Analisis hubungan biaya iklan terhadap jumlah
+                penjualan produk menggunakan satu variabel independen.
+            </p>
+
+            <div class="project-tags">
+                <span>Python</span>
+                <span>Pandas</span>
+                <span>Scikit-learn</span>
+            </div>
+
+            <a href="{{ url_for('slr') }}" class="project-link">
+                Explore Project <span>→</span>
+            </a>
+        </article>
+
+        <article class="project-card featured-card">
+            <div class="project-top">
+                <span class="project-number">02</span>
+                <span class="project-type">REGRESSION</span>
+            </div>
+
+            <div class="project-symbol">⌁</div>
+
+            <h3>Multiple Linear Regression</h3>
+
+            <p>
+                Prediksi konsumsi listrik rumah tangga berdasarkan
+                jumlah penghuni, penggunaan AC, dan perangkat elektronik.
+            </p>
+
+            <div class="project-tags">
+                <span>Python</span>
+                <span>Pandas</span>
+                <span>Scikit-learn</span>
+            </div>
+
+            <a href="{{ url_for('mlr') }}" class="project-link">
+                Explore Project <span>→</span>
+            </a>
+        </article>
+
+    </div>
+</section>
+
+<section class="about-section" id="about">
+    <span class="section-label">ABOUT THIS PORTFOLIO</span>
+    <h2>Learning Machine Learning<br>Through Real-World Cases.</h2>
+    <p>
+        Website ini dikembangkan sebagai media portofolio digital
+        untuk mendokumentasikan proses pembelajaran Machine Learning,
+        mulai dari persiapan dataset, analisis data, pembangunan model,
+        visualisasi, hingga simulasi prediksi.
+    </p>
+</section>
+
+{% endblock %}

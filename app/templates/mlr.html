@@ -1,0 +1,272 @@
+
+{% extends "base.html" %}
+
+{% block title %}Multiple Linear Regression | ML Portfolio{% endblock %}
+
+{% block content %}
+
+<section class="detail-hero">
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <span class="section-label">PRACTICUM 02 / REGRESSION</span>
+
+    <h1>Multiple Linear <span>Regression.</span></h1>
+
+    <p>
+        Prediksi konsumsi listrik rumah tangga berdasarkan
+        jumlah penghuni, penggunaan AC, dan perangkat elektronik.
+    </p>
+
+    <div class="project-tags">
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>Scikit-learn</span>
+    </div>
+</section>
+
+<section class="detail-content">
+    <div class="detail-block">
+        <span class="section-label">01 / OVERVIEW</span>
+        <h2>Tentang Praktikum</h2>
+        <p>
+            Praktikum ini membahas penerapan Multiple Linear
+            Regression untuk memprediksi konsumsi listrik rumah
+            tangga berdasarkan beberapa variabel independen.
+        </p>
+        <p>
+            Dataset menggunakan simulasi kondisi rumah tangga
+            untuk mempelajari hubungan beberapa faktor terhadap
+            konsumsi energi listrik.
+        </p>
+    </div>
+
+    <div class="detail-block">
+        <span class="section-label">02 / DATASET</span>
+        <h2>Variabel Penelitian</h2>
+
+        <div class="variable-grid">
+            <div class="variable-card">
+                <span>X1 — Independent Variable</span>
+                <h3>Jumlah Penghuni</h3>
+                <p>Jumlah orang yang tinggal dalam rumah.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>X2 — Independent Variable</span>
+                <h3>Penggunaan AC</h3>
+                <p>Durasi penggunaan AC per hari.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>X3 — Independent Variable</span>
+                <h3>Penggunaan Elektronik</h3>
+                <p>Durasi penggunaan perangkat elektronik.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>Y — Dependent Variable</span>
+                <h3>Konsumsi Listrik</h3>
+                <p>Jumlah konsumsi listrik bulanan dalam kWh.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-block">
+        <span class="section-label">03 / METHODOLOGY</span>
+        <h2>Tahapan Praktikum</h2>
+
+        <ol class="method-list">
+            <li>Mempersiapkan dataset konsumsi listrik.</li>
+            <li>Melakukan statistik deskriptif.</li>
+            <li>Menganalisis hubungan antarvariabel.</li>
+            <li>Membuat visualisasi dan matriks korelasi.</li>
+            <li>Membangun model Multiple Linear Regression.</li>
+            <li>Melakukan simulasi prediksi konsumsi listrik.</li>
+        </ol>
+    </div>
+</section>
+
+<!-- ==================================
+     DATASET DAN STATISTIK MLR
+================================== -->
+
+<section class="detail-content">
+
+    <div class="detail-block">
+        <span class="section-label">04 / DATASET ANALYSIS</span>
+        <h2>Dataset Overview</h2>
+
+        <div class="variable-grid">
+
+            <div class="variable-card">
+                <span>TOTAL OBSERVATIONS</span>
+                <h3>{{ total_data }} Data</h3>
+                <p>Jumlah observasi rumah tangga.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>AVERAGE ELECTRICITY</span>
+                <h3>{{ "%.2f"|format(dataset|sum(attribute='konsumsi_listrik') / total_data) }} kWh</h3>
+                <p>Rata-rata konsumsi listrik.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- HEATMAP -->
+
+    <div class="detail-block">
+        <span class="section-label">05 / DATA VISUALIZATION</span>
+        <h2>Correlation Heatmap</h2>
+
+        <p>
+            Visualisasi korelasi antara variabel jumlah penghuni,
+            penggunaan AC, penggunaan elektronik, dan konsumsi listrik.
+        </p>
+
+        <img
+            src="{{ url_for('static', filename='images/mlr_correlation.png') }}"
+            alt="Heatmap korelasi MLR"
+            style="width:100%; margin-top:25px; border-radius:12px;"
+        >
+    </div>
+
+    <!-- MODEL EQUATION -->
+
+    <div class="detail-block">
+        <span class="section-label">06 / MODEL RESULT</span>
+        <h2>Regression Equation</h2>
+
+        <div class="variable-card">
+            <span>MULTIPLE LINEAR REGRESSION</span>
+
+            <h3>Y = {{ intercept }}</h3>
+
+            <p>
+                Koefisien jumlah penghuni:
+                {{ "%.4f"|format(coefficients[0]) }}
+                <br>
+
+                Koefisien penggunaan AC:
+                {{ "%.4f"|format(coefficients[1]) }}
+                <br>
+
+                Koefisien penggunaan elektronik:
+                {{ "%.4f"|format(coefficients[2]) }}
+            </p>
+        </div>
+    </div>
+
+    <!-- PREDICTION -->
+
+    <div class="detail-block">
+        <span class="section-label">07 / PREDICTION SIMULATION</span>
+        <h2>Simulasi Prediksi Konsumsi Listrik</h2>
+
+        <p>
+            Masukkan karakteristik rumah tangga untuk
+            memperkirakan konsumsi listrik bulanan.
+        </p>
+
+        <form method="POST" class="prediction-form">
+
+            <label>Jumlah Penghuni (orang)</label>
+
+            <input
+                type="number"
+                name="jumlah_penghuni"
+                min="0"
+                step="any"
+                placeholder="Contoh: 4"
+                required
+            >
+
+            <label>Penggunaan AC (jam per hari)</label>
+
+            <input
+                type="number"
+                name="jam_penggunaan_ac"
+                min="0"
+                max="24"
+                step="any"
+                placeholder="Contoh: 8"
+                required
+            >
+
+            <label>Penggunaan Elektronik (jam per hari)</label>
+
+            <input
+                type="number"
+                name="jam_penggunaan_elektronik"
+                min="0"
+                max="24"
+                step="any"
+                placeholder="Contoh: 8"
+                required
+            >
+
+            <button type="submit" class="btn-primary">
+                Prediksi Konsumsi Listrik →
+            </button>
+
+        </form>
+
+        {% if error %}
+            <p class="prediction-error">{{ error }}</p>
+        {% endif %}
+
+        {% if prediction is not none %}
+
+            <div class="prediction-result">
+                <span>HASIL PREDIKSI KONSUMSI LISTRIK</span>
+
+                <h3>{{ prediction }} kWh</h3>
+
+                <p>
+                    Estimasi konsumsi listrik bulanan
+                    berdasarkan model MLR.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- DATA TABLE -->
+
+    <div class="detail-block">
+        <span class="section-label">08 / RAW DATA</span>
+        <h2>Dataset Konsumsi Listrik</h2>
+
+        <div style="overflow-x:auto;">
+            <table class="dataset-table">
+
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Penghuni</th>
+                        <th>AC (Jam)</th>
+                        <th>Elektronik (Jam)</th>
+                        <th>Konsumsi (kWh)</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in dataset %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row.jumlah_penghuni }}</td>
+                        <td>{{ row.jam_penggunaan_ac }}</td>
+                        <td>{{ row.jam_penggunaan_elektronik }}</td>
+                        <td>{{ row.konsumsi_listrik }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}

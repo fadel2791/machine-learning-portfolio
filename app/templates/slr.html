@@ -1,0 +1,233 @@
+
+{% extends "base.html" %}
+
+{% block title %}Simple Linear Regression | ML Portfolio{% endblock %}
+
+{% block content %}
+
+<section class="detail-hero">
+    <a href="/" class="back-link">← Back to Home</a>
+
+    <span class="section-label">PRACTICUM 01 / REGRESSION</span>
+
+    <h1>Simple Linear <span>Regression.</span></h1>
+
+    <p>
+        Analisis pengaruh biaya iklan terhadap jumlah penjualan
+        produk menggunakan algoritma Simple Linear Regression.
+    </p>
+
+    <div class="project-tags">
+        <span>Python</span>
+        <span>Pandas</span>
+        <span>Scikit-learn</span>
+    </div>
+</section>
+
+<section class="detail-content">
+    <div class="detail-block">
+        <span class="section-label">01 / OVERVIEW</span>
+        <h2>Tentang Praktikum</h2>
+        <p>
+            Praktikum ini membahas penerapan algoritma Simple Linear
+            Regression untuk menganalisis hubungan antara biaya iklan
+            dengan jumlah penjualan produk.
+        </p>
+        <p>
+            Simulasi menggunakan dataset buatan yang menggambarkan
+            hubungan biaya iklan dengan penjualan. Model digunakan
+            untuk mempelajari pola hubungan dan melakukan prediksi.
+        </p>
+    </div>
+
+    <div class="detail-block">
+        <span class="section-label">02 / DATASET</span>
+        <h2>Variabel Penelitian</h2>
+
+        <div class="variable-grid">
+            <div class="variable-card">
+                <span>X — Independent Variable</span>
+                <h3>Biaya Iklan</h3>
+                <p>Jumlah biaya iklan dalam ribuan rupiah.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>Y — Dependent Variable</span>
+                <h3>Penjualan</h3>
+                <p>Jumlah produk yang berhasil terjual dalam unit.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="detail-block">
+        <span class="section-label">03 / METHODOLOGY</span>
+        <h2>Tahapan Praktikum</h2>
+
+        <ol class="method-list">
+            <li>Mempersiapkan dataset penjualan produk.</li>
+            <li>Melakukan eksplorasi dan statistik deskriptif.</li>
+            <li>Membuat visualisasi hubungan variabel.</li>
+            <li>Membangun model Simple Linear Regression.</li>
+            <li>Menghitung intercept dan koefisien regresi.</li>
+            <li>Melakukan simulasi prediksi penjualan.</li>
+        </ol>
+    </div>
+</section>
+
+
+<!-- ==================================
+     DATASET DAN STATISTIK SLR
+================================== -->
+
+<section class="detail-content">
+
+    <div class="detail-block">
+        <span class="section-label">04 / DATASET ANALYSIS</span>
+        <h2>Dataset Overview</h2>
+
+        <div class="variable-grid">
+
+            <div class="variable-card">
+                <span>TOTAL OBSERVATIONS</span>
+                <h3>{{ total_data }} Data</h3>
+                <p>Jumlah observasi dalam dataset simulasi.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>AVERAGE ADVERTISING COST</span>
+                <h3>{{ mean_ad }}</h3>
+                <p>Rata-rata biaya iklan dalam ribuan rupiah.</p>
+            </div>
+
+            <div class="variable-card">
+                <span>AVERAGE SALES</span>
+                <h3>{{ mean_sales }} Unit</h3>
+                <p>Rata-rata penjualan produk.</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- VISUALISASI -->
+
+    <div class="detail-block">
+        <span class="section-label">05 / DATA VISUALIZATION</span>
+        <h2>Regression Analysis</h2>
+
+        <p>
+            Visualisasi hubungan antara biaya iklan
+            dengan jumlah penjualan produk.
+        </p>
+
+        <img
+            src="{{ url_for('static', filename='images/slr_regression.png') }}"
+            alt="Grafik regresi SLR"
+            style="width:100%; margin-top:25px; border-radius:12px;"
+        >
+    </div>
+
+    <!-- MODEL EQUATION -->
+
+    <div class="detail-block">
+        <span class="section-label">06 / MODEL RESULT</span>
+        <h2>Regression Equation</h2>
+
+        <div class="variable-card">
+            <span>SIMPLE LINEAR REGRESSION</span>
+
+            <h3>
+                Y = {{ intercept }} + {{ coefficient }}X
+            </h3>
+
+            <p>
+                Intercept: {{ intercept }}
+                <br>
+                Regression coefficient: {{ coefficient }}
+            </p>
+        </div>
+    </div>
+
+    <!-- PREDICTION -->
+
+    <div class="detail-block">
+        <span class="section-label">07 / PREDICTION SIMULATION</span>
+        <h2>Simulasi Prediksi Penjualan</h2>
+
+        <p>
+            Masukkan biaya iklan untuk memperkirakan
+            jumlah penjualan produk berdasarkan model SLR.
+        </p>
+
+        <form method="POST" class="prediction-form">
+
+            <label>Biaya Iklan (ribuan rupiah)</label>
+
+            <input
+                type="number"
+                name="biaya_iklan"
+                min="0"
+                step="any"
+                placeholder="Contoh: 500"
+                required
+            >
+
+            <button type="submit" class="btn-primary">
+                Prediksi Penjualan →
+            </button>
+
+        </form>
+
+        {% if error %}
+            <p class="prediction-error">{{ error }}</p>
+        {% endif %}
+
+        {% if prediction is not none %}
+
+            <div class="prediction-result">
+                <span>HASIL PREDIKSI PENJUALAN</span>
+
+                <h3>{{ prediction }} Unit</h3>
+
+                <p>
+                    Estimasi jumlah produk yang akan terjual
+                    berdasarkan input biaya iklan.
+                </p>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+    <!-- DATA TABLE -->
+
+    <div class="detail-block">
+        <span class="section-label">08 / RAW DATA</span>
+        <h2>Dataset Penjualan</h2>
+
+        <div style="overflow-x:auto;">
+            <table class="dataset-table">
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Biaya Iklan</th>
+                        <th>Penjualan</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for row in dataset %}
+                    <tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ row.biaya_iklan }}</td>
+                        <td>{{ row.penjualan }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</section>
+
+
+{% endblock %}
